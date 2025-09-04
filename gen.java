@@ -7,22 +7,22 @@ import javax.swing.text.StyledDocument;
 
 public class gen {
     JFrame frame;
-    JLayeredPane layers;                 // stack menu/game for cross-fade
+    JLayeredPane layers;              
     FadingPanel menuPanel, gamePanel;
     JButton startButton, exitButton;
     weapon w = new weapon();
     int M = 30, H = 100, S = 50;
     JButton slot4a;
-    inden den = new inden();            // your class
+    inden den = new inden();            
     JTextPane mainArea = new JTextPane();
     boolean comp = true;
     int ehealth;
     JPanel lp;
     JPanel top = new JPanel(new GridLayout(2, 1));
     JButton backButton = new JButton("Back to Menu");
-    private JPanel cards;        // will hold gameCards
+    private JPanel cards;       
     private JPanel roomcards;
-    private JButton backGame;    // single instance, not shadowed
+    private JButton backGame;   
 
 
     public static void main(String[] args) {
@@ -40,11 +40,11 @@ public class gen {
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
 
-        // Layered pane to overlap menu and game for cross-fade
+      
         layers = new JLayeredPane();
         layers.setPreferredSize(new Dimension(800, 600));
 
-        // Build panels
+    
         menuPanel = buildMenuPanel();
         gamePanel = createGamePanel();
         lp = loadingPanel();
@@ -61,7 +61,7 @@ public class gen {
         ((FadingPanel) lp).setAlpha(0f);
         lp.setVisible(false);
 
-        // Add to layers (same layer; we animate alpha)
+
         layers.add(menuPanel, JLayeredPane.DEFAULT_LAYER);
         layers.add(gamePanel, JLayeredPane.DEFAULT_LAYER);
         layers.add(lp, JLayeredPane.DEFAULT_LAYER);
@@ -69,7 +69,7 @@ public class gen {
         frame.setContentPane(layers);
         frame.setVisible(true);
 
-        // Optional: periodic check for room completion controls slot4a visibility
+
         Timer checkTimer = new Timer(1000, e -> {
             if (slot4a != null) {
                 slot4a.setVisible(RoomY());
@@ -87,7 +87,7 @@ public class gen {
         titleLabel.setForeground(Color.white);
         titleLabel.setFont(new Font("Times New Roman", Font.BOLD, 48));
         titleLabel.setBorder(BorderFactory.createEmptyBorder(175, 100, 100, 100));
-        // Keep label non-opaque; let the panel's black show behind it.
+
         titleLabel.setOpaque(false);
         panel.add(titleLabel, BorderLayout.NORTH);
 
@@ -131,7 +131,7 @@ public class gen {
         hide.setVisible(true);
 
         final int delayMs = 16;   // ~60 FPS
-        final float step  = 0.06f; // duration ~ 16/0.06*1000 ≈ 266ms; adjust to taste
+        final float step  = 0.06f; // duration ~ 16/0.06*1000 ≈ 266ms
 
         Timer t = new Timer(delayMs, null);
         t.addActionListener(new ActionListener() {
@@ -156,7 +156,7 @@ public class gen {
         FadingPanel panel = new FadingPanel(new BorderLayout());
         panel.setBackground(Color.black);
 
-        // Top: stats + centered message
+
         JPanel stats = new JPanel(new GridLayout(1, 3));
         stats.setBackground(Color.black);
         stats.setBorder(BorderFactory.createEmptyBorder(25, 25, 0, 25));
@@ -165,7 +165,7 @@ public class gen {
         stats.add(createStatLabel("Strength: " + S, JLabel.CENTER));
         stats.add(createStatLabel("Mana: " + M, JLabel.RIGHT));
 
-        // Replace mainArea direct add with card layout
+
         CardLayout roomLayout = new CardLayout();
         roomcards = new JPanel(roomLayout);
         roomcards.setBackground(Color.BLACK);
@@ -185,9 +185,9 @@ public class gen {
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
         doc.setParagraphAttributes(0, doc.getLength(), center, false);
         JScrollPane scroll = new JScrollPane(mainArea);
-        scroll.setBorder(null); // optional, cleaner look
+        scroll.setBorder(null); 
         scroll.setOpaque(false);
-        scroll.getViewport().setOpaque(false);  // <-- important, fixes the grey
+        scroll.getViewport().setOpaque(false); 
         roomcards.add(scroll, "MainArea");
 
         top.setBackground(Color.BLACK);
@@ -195,7 +195,7 @@ public class gen {
         top.add(roomcards);
         panel.add(top, BorderLayout.NORTH);
 
-        // Middle: internal cards (Attack / Items / Spells)
+
         CardLayout gameLayout = new CardLayout();
         cards = new JPanel(gameLayout);
         cards.setBackground(Color.BLACK);
@@ -211,7 +211,7 @@ public class gen {
         cards.add(spellPanel,    "Spells");
         panel.add(cards, BorderLayout.CENTER);
 
-                // Bottom: back button (fixed height bar)
+
         backButton.setFont(new Font("Arial", Font.PLAIN, 20));
         backButton.setBackground(Color.black);
         backButton.setForeground(Color.white);
@@ -236,7 +236,7 @@ public class gen {
         backWrapper.add(backButton);
         backWrapper.add(backGame);
 
-        // Force fixed height so it won't get pushed off screen
+
         backWrapper.setPreferredSize(new Dimension(800, 70));
 
         panel.add(backWrapper, BorderLayout.SOUTH);
@@ -361,7 +361,7 @@ public class gen {
 
     // ---------- GAME LOGIC HOOKS ----------
     private boolean RoomY() {
-        comp = true; // your logic here
+        comp = true; 
         return comp;
     }
     private void makeRoomA(){
@@ -384,7 +384,7 @@ public class gen {
         roomA.add(label, gbc);
     }
 
-    // Add panel to roomcards
+
     roomcards.add(roomA, "RoomA");
 
     // Switch to it
@@ -393,8 +393,8 @@ public class gen {
     }
 
     private void roomIn() {
-        rooms room = den.getRandomrooms(); // use your inden instance
-        String roomName = room.getName();    // get the actual string
+        rooms room = den.getRandomrooms();
+        String roomName = room.getName();  
 
         switch (roomName) {
             case "chestroom": mainArea.setText("ChestRoom!"); 
