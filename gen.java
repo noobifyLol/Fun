@@ -367,7 +367,6 @@ public class gen {
     private void makeRoomA(){
     JPanel roomA = new JPanel(new GridBagLayout()); 
     roomA.setBackground(Color.BLACK);
-
     GridBagConstraints gbc = new GridBagConstraints();
     gbc.gridx = GridBagConstraints.RELATIVE;
     gbc.gridy = 0; // stack vertically
@@ -390,8 +389,89 @@ public class gen {
     // Switch to it
     CardLayout layout = (CardLayout) roomcards.getLayout();
     layout.show(roomcards, "RoomA");
+    comp = true;
+    }
+    private void makeRoomB(){
+    JPanel roomB = new JPanel(new GridBagLayout()); 
+    roomB.setBackground(Color.BLACK);
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.gridx = GridBagConstraints.RELATIVE;
+    gbc.gridy = 0; // stack vertically
+    gbc.insets = new Insets(10, 10, 10, 10); // spacing
+    gbc.anchor = GridBagConstraints.CENTER;
+    ehealth = eHealth(75);
+    JLabel text1 = new JLabel("Health : " + ehealth);
+    JLabel text2 = new JLabel("Enemy: OL ");
+    JLabel text3 = new JLabel("Loot: Gold ");
+
+    for (JLabel label : new JLabel[]{text1, text2, text3}) {
+        label.setForeground(Color.WHITE);
+        label.setFont(new Font("Arial", Font.BOLD, 28));
+        roomB.add(label, gbc);
     }
 
+
+    roomcards.add(roomB, "RoomB");
+
+    // Switch to it
+    CardLayout layout = (CardLayout) roomcards.getLayout();
+    layout.show(roomcards, "RoomB");
+    comp = true;
+    }
+    private void makeRoomC(){
+    JPanel roomC = new JPanel(new GridBagLayout()); 
+    roomC.setBackground(Color.BLACK);
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.gridx = GridBagConstraints.RELATIVE;
+    gbc.gridy = 0; // stack vertically
+    gbc.insets = new Insets(10, 10, 10, 10); // spacing
+    gbc.anchor = GridBagConstraints.CENTER;
+    ehealth = eHealth(150);
+    JLabel text1 = new JLabel("Health : " + ehealth);
+    JLabel text2 = new JLabel("Enemy: De ");
+    JLabel text3 = new JLabel("Loot: Orn Horn ");
+
+    for (JLabel label : new JLabel[]{text1, text2, text3}) {
+        label.setForeground(Color.WHITE);
+        label.setFont(new Font("Arial", Font.BOLD, 28));
+        roomC.add(label, gbc);
+    }
+
+
+    roomcards.add(roomC, "RoomC");
+
+    // Switch to it
+    CardLayout layout = (CardLayout) roomcards.getLayout();
+    layout.show(roomcards, "RoomC");
+    comp = true; // __________________________________________________________ Soon change this to false !!!! for the other rooms too
+    }
+    private void makeRoomB(){
+    JPanel roomB = new JPanel(new GridBagLayout()); 
+    roomB.setBackground(Color.BLACK);
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.gridx = GridBagConstraints.RELATIVE;
+    gbc.gridy = 0; // stack vertically
+    gbc.insets = new Insets(10, 10, 10, 10); // spacing
+    gbc.anchor = GridBagConstraints.CENTER;
+    ehealth = eHealth(75);
+    JLabel text1 = new JLabel("Health : " + ehealth);
+    JLabel text2 = new JLabel("Enemy: OL ");
+    JLabel text3 = new JLabel("Loot: Gold ");
+
+    for (JLabel label : new JLabel[]{text1, text2, text3}) {
+        label.setForeground(Color.WHITE);
+        label.setFont(new Font("Arial", Font.BOLD, 28));
+        roomB.add(label, gbc);
+    }
+
+
+    roomcards.add(roomB, "RoomB");
+
+    // Switch to it
+    CardLayout layout = (CardLayout) roomcards.getLayout();
+    layout.show(roomcards, "RoomB");
+    comp = true;
+    }
     private void roomIn() {
         rooms room = den.getRandomrooms();
         String roomName = room.getName();  
@@ -407,21 +487,35 @@ public class gen {
             case "enemy1":    
             makeRoomA();
             crossFade( gamePanel,(FadingPanel) lp);  
-            comp = false; 
-             
+            if (comp){
+                slot4a.setVisible(true);
+            }
+             else{
+                slot4a.setVisible(false);
+             }
             break;
 
             case "enemy2":    
-            crossFade( gamePanel,(FadingPanel) lp);  
-            mainArea.setText("enemy2!");    
-            comp = false; 
+            makeRoomB();
+            crossFade( gamePanel,(FadingPanel) lp);    
+            if (comp){
+                slot4a.setVisible(true);
+            }
+             else{
+                slot4a.setVisible(false);
+             }
              
             break;
 
             case "enemy3":    
-            crossFade( gamePanel,(FadingPanel) lp);  
-            mainArea.setText("enemy3!");    
-            comp = false; 
+            makeRoomC();
+            crossFade( gamePanel,(FadingPanel) lp); ;    
+            if (comp){
+                slot4a.setVisible(true);
+            }
+             else{
+                slot4a.setVisible(false);
+             }
              
             break;
 
