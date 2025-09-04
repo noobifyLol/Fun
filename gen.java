@@ -445,39 +445,22 @@ public class gen {
     layout.show(roomcards, "RoomC");
     comp = true; // __________________________________________________________ Soon change this to false !!!! for the other rooms too
     }
-    private void makeRoomB(){
-    JPanel roomB = new JPanel(new GridBagLayout()); 
-    roomB.setBackground(Color.BLACK);
-    GridBagConstraints gbc = new GridBagConstraints();
-    gbc.gridx = GridBagConstraints.RELATIVE;
-    gbc.gridy = 0; // stack vertically
-    gbc.insets = new Insets(10, 10, 10, 10); // spacing
-    gbc.anchor = GridBagConstraints.CENTER;
-    ehealth = eHealth(75);
-    JLabel text1 = new JLabel("Health : " + ehealth);
-    JLabel text2 = new JLabel("Enemy: OL ");
-    JLabel text3 = new JLabel("Loot: Gold ");
-
-    for (JLabel label : new JLabel[]{text1, text2, text3}) {
-        label.setForeground(Color.WHITE);
-        label.setFont(new Font("Arial", Font.BOLD, 28));
-        roomB.add(label, gbc);
-    }
-
-
-    roomcards.add(roomB, "RoomB");
+    private void makeRoomChest(){
+    JPanel Mchest = new JPanel(new GridBagLayout());
+        roomcards.add(Mchest, "chest");
 
     // Switch to it
     CardLayout layout = (CardLayout) roomcards.getLayout();
-    layout.show(roomcards, "RoomB");
-    comp = true;
+    layout.show(roomcards, "chest");
     }
+
     private void roomIn() {
         rooms room = den.getRandomrooms();
         String roomName = room.getName();  
 
         switch (roomName) {
-            case "chestroom": mainArea.setText("ChestRoom!"); 
+            case "chestroom":
+            makeRoomChest();
             comp = true;  
              
             
